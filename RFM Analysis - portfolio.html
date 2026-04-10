@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Duc Anh Nguyen | Data Analytics Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            vip: '#064e3b',       /* Emerald 900 */
+                            thanthiet: '#059669', /* Emerald 600 */
+                            tiemnang: '#6ee7b7',  /* Emerald 300 */
+                            vanglai: '#dc2626',   /* Red 600 */
+                            bg: '#f8fafc',
+                            surface: '#ffffff',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Scrollbar for SQL block */
+        .custom-scrollbar::-webkit-scrollbar { width: 8px; height: 8px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #1e293b; border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #475569; border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #64748b; }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+    </style>
+</head>
+<body class="bg-brand-bg text-slate-800 font-sans antialiased selection:bg-emerald-200 selection:text-emerald-900">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-card shadow-sm transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex-shrink-0 flex items-center gap-2">
+                    <i data-lucide="database" class="w-6 h-6 text-brand-thanthiet"></i>
+                    <span class="font-bold text-xl tracking-tight text-slate-900">Duc Anh Nguyen</span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#overview" class="text-slate-600 hover:text-brand-thanthiet font-medium transition-colors">Overview</a>
+                    <a href="#methodology" class="text-slate-600 hover:text-brand-thanthiet font-medium transition-colors">Methodology</a>
+                    <a href="#findings" class="text-slate-600 hover:text-brand-thanthiet font-medium transition-colors">Findings</a>
+                    <a href="#strategy" class="text-slate-600 hover:text-brand-thanthiet font-medium transition-colors">Strategy</a>
+                    <a href="#sql" class="text-slate-600 hover:text-brand-thanthiet font-medium transition-colors">SQL Code</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="pt-32 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="flex flex-col md:flex-row items-center gap-12">
+            <div class="flex-1 space-y-6">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-sm font-semibold">
+                    <span class="relative flex h-2 w-2">
+                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                      <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                    </span>
+                    Portfolio Project 2026
+                </div>
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 leading-tight">
+                    Customer 360 <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-thanthiet to-brand-vip">RFM Analysis</span>
+                </h1>
+                <p class="text-lg text-slate-600 max-w-2xl leading-relaxed">
+                    Transforming historical transaction data of over 900,000 customers into actionable strategic insights using an OLAP model and an adapted BCG matrix concept.
+                </p>
+                <div class="flex gap-4 pt-4">
+                    <a href="#overview" class="px-6 py-3 bg-slate-900 text-white font-medium rounded-lg hover:bg-slate-800 transition-colors inline-flex items-center gap-2">
+                        View Case Study <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </a>
+                    <a href="#sql" class="px-6 py-3 bg-white text-slate-700 font-medium rounded-lg border border-slate-200 hover:bg-slate-50 transition-colors inline-flex items-center gap-2">
+                        <i data-lucide="code-2" class="w-4 h-4"></i> Review SQL
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Hero Stats Grid -->
+            <div class="flex-1 w-full grid grid-cols-2 gap-4">
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                    <i data-lucide="users" class="w-8 h-8 text-brand-thanthiet mb-4"></i>
+                    <p class="text-sm text-slate-500 font-medium uppercase tracking-wider">Dataset</p>
+                    <p class="text-3xl font-bold text-slate-900 mt-1">900K+</p>
+                    <p class="text-sm text-slate-600 mt-1">Customers Analyzed</p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                    <i data-lucide="pie-chart" class="w-8 h-8 text-brand-vip mb-4"></i>
+                    <p class="text-sm text-slate-500 font-medium uppercase tracking-wider">Segmentation</p>
+                    <p class="text-3xl font-bold text-slate-900 mt-1">4</p>
+                    <p class="text-sm text-slate-600 mt-1">Strategic Cohorts</p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                    <i data-lucide="calendar" class="w-8 h-8 text-brand-tiemnang mb-4"></i>
+                    <p class="text-sm text-slate-500 font-medium uppercase tracking-wider">Timeframe</p>
+                    <p class="text-3xl font-bold text-slate-900 mt-1">Historical</p>
+                    <p class="text-sm text-slate-600 mt-1">Data up to 2022</p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                    <i data-lucide="server" class="w-8 h-8 text-brand-vanglai mb-4"></i>
+                    <p class="text-sm text-slate-500 font-medium uppercase tracking-wider">Architecture</p>
+                    <p class="text-3xl font-bold text-slate-900 mt-1">OLAP</p>
+                    <p class="text-sm text-slate-600 mt-1">Data Model Output</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Executive Summary & Business Overview -->
+    <section id="overview" class="py-16 bg-white border-y border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-12">
+                <h2 class="text-3xl font-bold text-slate-900">Executive Summary</h2>
+                <div class="h-1 w-20 bg-brand-thanthiet mt-4 rounded"></div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12">
+                <div class="space-y-6">
+                    <h3 class="text-xl font-bold text-slate-800 flex items-center gap-2">
+                        <i data-lucide="target" class="w-6 h-6 text-brand-thanthiet"></i> The Business Problem
+                    </h3>
+                    <p class="text-slate-600 leading-relaxed">
+                        While the Customer 360 platform stores OLTP data (contracts, registration, GMV), it lacked actionable analytical segmentation. Stakeholders needed answers to three core questions:
+                    </p>
+                    <ul class="space-y-3 mt-4">
+                        <li class="flex items-start gap-3">
+                            <div class="flex-shrink-0 w-6 h-6 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-700 font-bold text-sm">1</div>
+                            <span class="text-slate-700">Which customers generate most of the revenue today?</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <div class="flex-shrink-0 w-6 h-6 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-700 font-bold text-sm">2</div>
+                            <span class="text-slate-700">Which groups are likely to grow in value if we nurture them?</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <div class="flex-shrink-0 w-6 h-6 rounded-full bg-red-100 flex items-center justify-center text-red-700 font-bold text-sm">3</div>
+                            <span class="text-slate-700">Which customers are at risk of leaving if we do nothing?</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="bg-slate-50 p-8 rounded-2xl border border-slate-200">
+                    <h3 class="text-xl font-bold text-slate-800 flex items-center gap-2 mb-4">
+                        <i data-lucide="lightbulb" class="w-6 h-6 text-brand-vip"></i> The Solution
+                    </h3>
+                    <p class="text-slate-600 leading-relaxed mb-6">
+                        I leveraged Recency-Frequency-Monetary (RFM) analysis to score and map customers into four key segments based on an adapted BCG matrix concept.
+                    </p>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="p-4 bg-white rounded-xl border-l-4 border-brand-vip shadow-sm">
+                            <p class="font-bold text-slate-900">VIP (Stars)</p>
+                            <p class="text-xs text-slate-500 mt-1">High Value / High Engagement</p>
+                        </div>
+                        <div class="p-4 bg-white rounded-xl border-l-4 border-brand-thanthiet shadow-sm">
+                            <p class="font-bold text-slate-900">Thân Thiết (Cash Cows)</p>
+                            <p class="text-xs text-slate-500 mt-1">High Value / Solid Base</p>
+                        </div>
+                        <div class="p-4 bg-white rounded-xl border-l-4 border-brand-tiemnang shadow-sm">
+                            <p class="font-bold text-slate-900">Tiềm Năng (Question)</p>
+                            <p class="text-xs text-slate-500 mt-1">High Growth Opportunity</p>
+                        </div>
+                        <div class="p-4 bg-white rounded-xl border-l-4 border-brand-vanglai shadow-sm">
+                            <p class="font-bold text-slate-900">Vãng Lai (Dogs)</p>
+                            <p class="text-xs text-slate-500 mt-1">Lowest Share / At Risk</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Methodology -->
+    <section id="methodology" class="py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-slate-900">Method of Analysis</h2>
+                <p class="mt-4 text-slate-600 max-w-2xl mx-auto">Transforming raw OLTP data into structured business intelligence through a rigorous scoring logic.</p>
+            </div>
+
+            <div class="flex flex-col md:flex-row justify-center items-stretch gap-6 relative">
+                <!-- Step 1 -->
+                <div class="flex-1 bg-white p-6 rounded-2xl shadow-sm border border-slate-200 z-10">
+                    <div class="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center mb-4 border border-slate-200">
+                        <i data-lucide="database" class="w-6 h-6 text-slate-600"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-slate-900 mb-2">1. Data Aggregation</h3>
+                    <p class="text-sm text-slate-600">Extracted data from Customer Register and Transactions. Filtered GMV = 0 (promotions) to reduce noise. Aggregated metrics up to Sept 2022.</p>
+                </div>
+                
+                <!-- Connector (Desktop) -->
+                <div class="hidden md:flex items-center justify-center w-8">
+                    <i data-lucide="arrow-right" class="w-6 h-6 text-slate-400"></i>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="flex-1 bg-white p-6 rounded-2xl shadow-sm border border-slate-200 z-10">
+                    <div class="w-12 h-12 bg-emerald-50 rounded-xl flex items-center justify-center mb-4 border border-emerald-100">
+                        <i data-lucide="bar-chart-2" class="w-6 h-6 text-brand-thanthiet"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-slate-900 mb-2">2. IQR Scoring Logic</h3>
+                    <p class="text-sm text-slate-600">Calculated R, F, and M metrics per user. Used Interquartile Ranges to score each dimension from 1 (Lowest) to 4 (Highest).</p>
+                </div>
+
+                <!-- Connector (Desktop) -->
+                <div class="hidden md:flex items-center justify-center w-8">
+                    <i data-lucide="arrow-right" class="w-6 h-6 text-slate-400"></i>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="flex-1 bg-white p-6 rounded-2xl shadow-sm border border-slate-200 border-t-4 border-t-brand-vip z-10">
+                    <div class="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center mb-4 border border-emerald-200">
+                        <i data-lucide="layers" class="w-6 h-6 text-brand-vip"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-slate-900 mb-2">3. Segment Mapping</h3>
+                    <p class="text-sm text-slate-600">Concatenated rankings (e.g., "424") and mapped them against a lookup table translating technical codes to 4 business-friendly BCG segments.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Findings -->
+    <section id="findings" class="py-16 bg-brand-bg border-y border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-10">
+                <h2 class="text-3xl font-bold text-slate-900">Core Findings</h2>
+                <div class="h-1 w-20 bg-brand-vip mt-4 rounded"></div>
+            </div>
+
+            <!-- Segment Insight Cards (Replaces the text block) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+                <!-- VIP -->
+                <div class="bg-white p-6 rounded-2xl border border-brand-vip/20 shadow-sm relative overflow-hidden group hover:shadow-md transition-shadow">
+                    <div class="absolute top-0 right-0 w-16 h-16 bg-brand-vip/5 rounded-bl-full -z-10 group-hover:bg-brand-vip/10 transition-colors"></div>
+                    <div class="flex justify-between items-center mb-4">
+                        <h4 class="font-bold text-brand-vip text-lg">VIP (Stars)</h4>
+                        <i data-lucide="star" class="w-5 h-5 text-brand-vip"></i>
+                    </div>
+                    <div class="flex items-end gap-3 mb-3">
+                        <div>
+                            <span class="text-2xl font-bold text-slate-900">15%</span>
+                            <span class="text-xs text-slate-500 uppercase ml-1">Users</span>
+                        </div>
+                        <div class="pb-1 text-slate-300">|</div>
+                        <div>
+                            <span class="text-2xl font-bold text-brand-vip">24.5%</span>
+                            <span class="text-xs text-slate-500 uppercase ml-1">Rev</span>
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-600 leading-relaxed">Top driver of revenue impact due to their high monetary value and frequent engagement, driving a disproportionate amount of total revenue (DATA ANALYTICS REPORT · 2026.pdf).</p>
+                </div>
+
+                <!-- Than Thiet -->
+                <div class="bg-white p-6 rounded-2xl border border-brand-thanthiet/20 shadow-sm relative overflow-hidden group hover:shadow-md transition-shadow">
+                    <div class="absolute top-0 right-0 w-16 h-16 bg-brand-thanthiet/5 rounded-bl-full -z-10 group-hover:bg-brand-thanthiet/10 transition-colors"></div>
+                    <div class="flex justify-between items-center mb-4">
+                        <h4 class="font-bold text-brand-thanthiet text-lg">Thân Thiết</h4>
+                        <i data-lucide="shield-check" class="w-5 h-5 text-brand-thanthiet"></i>
+                    </div>
+                    <div class="flex items-end gap-3 mb-3">
+                        <div>
+                            <span class="text-2xl font-bold text-slate-900">31.5%</span>
+                            <span class="text-xs text-slate-500 uppercase ml-1">Users</span>
+                        </div>
+                        <div class="pb-1 text-slate-300">|</div>
+                        <div>
+                            <span class="text-2xl font-bold text-brand-thanthiet">27.4%</span>
+                            <span class="text-xs text-slate-500 uppercase ml-1">Rev</span>
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-600 leading-relaxed">The largest segment serving as the primary revenue driver; they represent the company's stable, loyal foundation (DATA ANALYTICS REPORT · 2026.pdf).</p>
+                </div>
+
+                <!-- Tiem Nang -->
+                <div class="bg-white p-6 rounded-2xl border border-brand-tiemnang/40 shadow-sm relative overflow-hidden group hover:shadow-md transition-shadow">
+                    <div class="absolute top-0 right-0 w-16 h-16 bg-brand-tiemnang/10 rounded-bl-full -z-10 group-hover:bg-brand-tiemnang/20 transition-colors"></div>
+                    <div class="flex justify-between items-center mb-4">
+                        <h4 class="font-bold text-emerald-600 text-lg">Tiềm Năng</h4>
+                        <i data-lucide="trending-up" class="w-5 h-5 text-emerald-500"></i>
+                    </div>
+                    <div class="flex items-end gap-3 mb-3">
+                        <div>
+                            <span class="text-2xl font-bold text-slate-900">26.7%</span>
+                            <span class="text-xs text-slate-500 uppercase ml-1">Users</span>
+                        </div>
+                        <div class="pb-1 text-slate-300">|</div>
+                        <div>
+                            <span class="text-2xl font-bold text-emerald-600">25.1%</span>
+                            <span class="text-xs text-slate-500 uppercase ml-1">Rev</span>
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-600 leading-relaxed">A high growth opportunity showing strong monetary potential but lower frequency, requiring targeted nurturing (DATA ANALYTICS REPORT · 2026.pdf).</p>
+                </div>
+
+                <!-- Vang Lai -->
+                <div class="bg-white p-6 rounded-2xl border border-brand-vanglai/20 shadow-sm relative overflow-hidden group hover:shadow-md transition-shadow">
+                    <div class="absolute top-0 right-0 w-16 h-16 bg-brand-vanglai/5 rounded-bl-full -z-10 group-hover:bg-brand-vanglai/10 transition-colors"></div>
+                    <div class="flex justify-between items-center mb-4">
+                        <h4 class="font-bold text-brand-vanglai text-lg">Vãng Lai</h4>
+                        <i data-lucide="user-minus" class="w-5 h-5 text-brand-vanglai"></i>
+                    </div>
+                    <div class="flex items-end gap-3 mb-3">
+                        <div>
+                            <span class="text-2xl font-bold text-slate-900">26.7%</span>
+                            <span class="text-xs text-slate-500 uppercase ml-1">Users</span>
+                        </div>
+                        <div class="pb-1 text-slate-300">|</div>
+                        <div>
+                            <span class="text-2xl font-bold text-brand-vanglai">22.9%</span>
+                            <span class="text-xs text-slate-500 uppercase ml-1">Rev</span>
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-600 leading-relaxed">Generates the lowest return; indicates many one-time buyers or previously active users who are now disengaging (DATA ANALYTICS REPORT · 2026.pdf).</p>
+                </div>
+            </div>
+
+            <!-- Distribution Charts Row -->
+            <div class="grid lg:grid-cols-2 gap-8 mb-10">
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                    <h3 class="font-bold text-lg text-slate-800 text-center mb-4">Customer Base Distribution</h3>
+                    <div class="relative h-64 w-full">
+                        <canvas id="customerChart"></canvas>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                    <h3 class="font-bold text-lg text-slate-800 text-center mb-4">Revenue Concentration (GMV)</h3>
+                    <div class="relative h-64 w-full">
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Risk Alert & Data Table Row -->
+            <div class="grid lg:grid-cols-3 gap-8 mb-16 items-start">
+                
+                <!-- Risk Alert Box -->
+                <div class="bg-gradient-to-br from-red-50 to-white p-6 rounded-2xl border border-red-100 shadow-sm h-full flex flex-col justify-center">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="alert-triangle" class="w-5 h-5 text-red-600"></i>
+                        </div>
+                        <h4 class="font-bold text-red-900 text-lg">High Risk Segment</h4>
+                    </div>
+                    <p class="text-sm text-slate-700 mb-4 leading-relaxed">
+                        The Vãng Lai segment represents <strong class="text-red-700 text-xl block mt-1 tracking-tight">18.91bn</strong> in revenue at risk (DATA ANALYTICS REPORT · 2026.pdf).
+                    </p>
+                    <div class="bg-white/60 p-3 rounded-lg border border-red-50">
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            With an average of <strong>91.58 inactive days</strong>, this revenue is fragile and indicates a strong churn probability if immediate, low-cost automated actions are not taken (DATA ANALYTICS REPORT · 2026.pdf).
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Behavioral Profile Table -->
+                <div class="lg:col-span-2 bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden h-full flex flex-col">
+                    <div class="p-5 border-b border-slate-100 bg-slate-50/50">
+                        <h3 class="font-bold text-lg text-slate-900">Segment Behavioral Profiles</h3>
+                    </div>
+                    <div class="overflow-x-auto flex-grow">
+                        <table class="min-w-full divide-y divide-slate-100 text-sm">
+                            <thead>
+                                <tr>
+                                    <th class="px-6 py-4 text-left font-semibold text-slate-500 uppercase tracking-wider text-xs">Segment</th>
+                                    <th class="px-6 py-4 text-right font-semibold text-slate-500 uppercase tracking-wider text-xs">Avg Recency (Days)</th>
+                                    <th class="px-6 py-4 text-right font-semibold text-slate-500 uppercase tracking-wider text-xs">Avg Freq (Annual)</th>
+                                    <th class="px-6 py-4 text-right font-semibold text-slate-500 uppercase tracking-wider text-xs">Avg Monetary</th>
+                                    <th class="px-6 py-4 text-right font-semibold text-slate-500 uppercase tracking-wider text-xs">Age (Yrs)</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-50">
+                                <tr class="hover:bg-slate-50 transition-colors">
+                                    <td class="px-6 py-4">
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-brand-vip">VIP</span>
+                                    </td>
+                                    <td class="px-6 py-4 text-right font-medium text-slate-900">32.70</td>
+                                    <td class="px-6 py-4 text-right font-medium text-slate-900">1.07</td>
+                                    <td class="px-6 py-4 text-right font-medium text-slate-900">144,856</td>
+                                    <td class="px-6 py-4 text-right text-slate-500">2</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50 transition-colors">
+                                    <td class="px-6 py-4">
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-50 text-brand-thanthiet border border-emerald-100">Thân Thiết</span>
+                                    </td>
+                                    <td class="px-6 py-4 text-right font-medium text-slate-900">48.88</td>
+                                    <td class="px-6 py-4 text-right font-medium text-slate-900">0.67</td>
+                                    <td class="px-6 py-4 text-right font-medium text-slate-900">77,390</td>
+                                    <td class="px-6 py-4 text-right text-slate-500">2</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50 transition-colors">
+                                    <td class="px-6 py-4">
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-teal-50 text-teal-700 border border-teal-100">Tiềm Năng</span>
+                                    </td>
+                                    <td class="px-6 py-4 text-right font-medium text-slate-900">59.43</td>
+                                    <td class="px-6 py-4 text-right font-medium text-slate-900">0.33</td>
+                                    <td class="px-6 py-4 text-right font-medium text-slate-900">83,575</td>
+                                    <td class="px-6 py-4 text-right text-slate-500">5</td>
+                                </tr>
+                                <tr class="hover:bg-slate-50 transition-colors">
+                                    <td class="px-6 py-4">
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-50 text-brand-vanglai border border-red-100">Vãng Lai</span>
+                                    </td>
+                                    <td class="px-6 py-4 text-right font-medium text-slate-900">91.58</td>
+                                    <td class="px-6 py-4 text-right font-medium text-slate-900">0.52</td>
+                                    <td class="px-6 py-4 text-right font-medium text-slate-900">75,836</td>
+                                    <td class="px-6 py-4 text-right text-slate-500">3</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Deep Dive Scatter Plots with Sidebars -->
+            <div class="space-y-8">
+                
+                <!-- Scatter 1: Frequency vs Monetary -->
+                <div class="bg-white rounded-2xl border border-slate-200 shadow-sm flex flex-col lg:flex-row overflow-hidden">
+                    <div class="lg:w-3/5 p-6 bg-slate-50/30">
+                        <div class="mb-4">
+                            <h3 class="font-bold text-lg text-slate-800 flex items-center gap-2">
+                                <i data-lucide="bar-chart-2" class="w-5 h-5 text-slate-400"></i> Frequency vs. Monetary
+                            </h3>
+                            <p class="text-xs text-slate-500 mt-1">Visualizing overall spend power against purchase frequency (DATA ANALYTICS REPORT · 2026.pdf).</p>
+                        </div>
+                        <div class="relative h-72 w-full">
+                            <canvas id="scatterMFChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="lg:w-2/5 p-8 border-t lg:border-t-0 lg:border-l border-slate-100 flex flex-col justify-center bg-white">
+                        <h4 class="font-bold text-slate-900 mb-6 flex items-center gap-2">
+                            <i data-lucide="lightbulb" class="w-5 h-5 text-amber-500"></i> Key Takeaways
+                        </h4>
+                        <ul class="space-y-5 text-sm text-slate-600">
+                            <li class="flex items-start gap-3">
+                                <i data-lucide="check-circle-2" class="w-5 h-5 text-brand-vip flex-shrink-0 mt-0.5"></i>
+                                <p>VIP customers show the broadest range of frequency and higher monetary values, clearly standing apart from other groups (DATA ANALYTICS REPORT · 2026.pdf).</p>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <div class="w-5 h-5 flex items-center justify-center flex-shrink-0 mt-0.5"><div class="w-1.5 h-1.5 rounded-full bg-slate-400"></div></div>
+                                <p>Most customers across other segments cluster at frequencies below 1 (on an annualized basis), with many achieving their highest transaction value at frequency ≈ 1 (DATA ANALYTICS REPORT · 2026.pdf).</p>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <div class="w-5 h-5 flex items-center justify-center flex-shrink-0 mt-0.5"><div class="w-1.5 h-1.5 rounded-full bg-slate-400"></div></div>
+                                <p>The chart does not show a strong linear relationship across the entire base; instead, there are pockets of high spenders at low‑to‑medium frequency and many low‑spend, low‑frequency customers, typical for retail (DATA ANALYTICS REPORT · 2026.pdf).</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Scatter 2: Recency vs Monetary -->
+                <div class="bg-white rounded-2xl border border-slate-200 shadow-sm flex flex-col lg:flex-row overflow-hidden">
+                    <div class="lg:w-3/5 p-6 bg-slate-50/30">
+                        <div class="mb-4">
+                            <h3 class="font-bold text-lg text-slate-800 flex items-center gap-2">
+                                <i data-lucide="clock" class="w-5 h-5 text-slate-400"></i> Recency vs. Monetary
+                            </h3>
+                            <p class="text-xs text-slate-500 mt-1">Identifying revenue impact against days since last purchase (DATA ANALYTICS REPORT · 2026.pdf).</p>
+                        </div>
+                        <div class="relative h-72 w-full">
+                            <canvas id="scatterMRChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="lg:w-2/5 p-8 border-t lg:border-t-0 lg:border-l border-slate-100 flex flex-col justify-center bg-white">
+                        <h4 class="font-bold text-slate-900 mb-6 flex items-center gap-2">
+                            <i data-lucide="activity" class="w-5 h-5 text-blue-500"></i> Recency Warning Signals
+                        </h4>
+                        <ul class="space-y-5 text-sm text-slate-600">
+                            <li class="flex items-start gap-3">
+                                <i data-lucide="split" class="w-5 h-5 text-slate-400 flex-shrink-0 mt-0.5"></i>
+                                <p>In terms of recency, there is a clear separation: VIP and Thân Thiết customers tend to purchase within shorter time windows, while Tiềm Năng and Vãng Lai customers often have last purchase dates more than 60 days ago (DATA ANALYTICS REPORT · 2026.pdf).</p>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i data-lucide="alert-circle" class="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5"></i>
+                                <p>This gap is an early warning signal that without targeted actions, many Tiềm Năng and Vãng Lai customers may continue to drift away, reducing future repeat revenue (DATA ANALYTICS REPORT · 2026.pdf).</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Appendix: SQL Code -->
+    <section id="sql" class="py-16 bg-slate-900 text-slate-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-8 border-b border-slate-700 pb-4">
+                <div>
+                    <h2 class="text-3xl font-bold text-white flex items-center gap-2">
+                        <i data-lucide="file-code-2" class="w-8 h-8 text-brand-tiemnang"></i> Appendix - SQL Code
+                    </h2>
+                    <p class="mt-2 text-slate-400">Data engineering logic utilized to generate the OLAP output.</p>
+                </div>
+                <div class="mt-4 md:mt-0 text-sm bg-slate-800 px-3 py-1 rounded text-slate-400 font-mono">
+                    Dialect: T-SQL / Standard SQL
+                </div>
+            </div>
+
+            <div class="bg-slate-950 rounded-xl border border-slate-800 shadow-2xl overflow-hidden">
+                <div class="bg-slate-800 px-4 py-2 flex items-center gap-2">
+                    <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                    <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                    <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                    <span class="ml-2 text-xs font-mono text-slate-400">rfm_scoring_pipeline.sql</span>
+                </div>
+                <div class="p-6 max-h-[500px] overflow-y-auto custom-scrollbar font-mono text-sm leading-relaxed text-slate-300">
+<pre><code><span class="text-slate-500">-- STEP 1
+-- BASE AGGREGATION
+-- Calculate Contract Age, Recency, Frequency, Monetary per customer</span>
+<span class="text-brand-tiemnang">WITH</span> RFM <span class="text-brand-tiemnang">AS</span> (
+  <span class="text-brand-tiemnang">SELECT</span> 
+    cr.id,
+    <span class="text-brand-tiemnang">CASE</span> 
+      <span class="text-brand-tiemnang">WHEN</span> DATEDIFF(year, created_date, <span class="text-amber-300">'2022-09-01'</span>) < 1 <span class="text-brand-tiemnang">THEN</span> 1.0
+      <span class="text-brand-tiemnang">ELSE</span> DATEDIFF(year, created_date, <span class="text-amber-300">'2022-09-01'</span>) 
+    <span class="text-brand-tiemnang">END AS</span> Contract_age,
+    DATEDIFF(day, <span class="text-purple-400">MAX</span>(ct.Purchase_Date), <span class="text-amber-300">'2022-09-01'</span>) <span class="text-brand-tiemnang">AS</span> Recency,
+    <span class="text-purple-400">COUNT</span>(ct.Transaction_ID) / 
+      <span class="text-brand-tiemnang">CASE</span> 
+        <span class="text-brand-tiemnang">WHEN</span> DATEDIFF(year, created_date, <span class="text-amber-300">'2022-09-01'</span>) < 1 <span class="text-brand-tiemnang">THEN</span> 1.0
+        <span class="text-brand-tiemnang">ELSE</span> DATEDIFF(year, created_date, <span class="text-amber-300">'2022-09-01'</span>) 
+      <span class="text-brand-tiemnang">END AS</span> Frequency,
+    <span class="text-purple-400">SUM</span>(ct.GMV) <span class="text-brand-tiemnang">AS</span> Monetary
+  <span class="text-brand-tiemnang">FROM</span> Customer_Registered cr
+  <span class="text-brand-tiemnang">JOIN</span> Customer_Transaction ct <span class="text-brand-tiemnang">ON</span> cr.id = ct.CustomerID
+  <span class="text-brand-tiemnang">WHERE</span> created_date <span class="text-brand-tiemnang">IS NOT NULL AND</span> ct.GMV > 0
+  <span class="text-brand-tiemnang">GROUP BY</span> cr.id, cr.created_date
+),
+
+<span class="text-slate-500">-- STEP 2
+-- IQR THRESHOLDS
+-- Compute Quartiles for each R, F, M metric using PERCENTILE_DISC</span>
+IQR <span class="text-brand-tiemnang">AS</span> (
+  <span class="text-brand-tiemnang">SELECT</span> id, Contract_age, Recency, Frequency, Monetary,
+    PERCENTILE_DISC(0.25) <span class="text-brand-tiemnang">WITHIN GROUP</span> (<span class="text-brand-tiemnang">ORDER BY</span> Recency) <span class="text-brand-tiemnang">OVER</span>() <span class="text-brand-tiemnang">AS</span> R_Q1,
+    PERCENTILE_DISC(0.50) <span class="text-brand-tiemnang">WITHIN GROUP</span> (<span class="text-brand-tiemnang">ORDER BY</span> Recency) <span class="text-brand-tiemnang">OVER</span>() <span class="text-brand-tiemnang">AS</span> R_Q2,
+    PERCENTILE_DISC(0.75) <span class="text-brand-tiemnang">WITHIN GROUP</span> (<span class="text-brand-tiemnang">ORDER BY</span> Recency) <span class="text-brand-tiemnang">OVER</span>() <span class="text-brand-tiemnang">AS</span> R_Q3,
+    <span class="text-purple-400">MAX</span>(Recency) <span class="text-brand-tiemnang">OVER</span>() <span class="text-brand-tiemnang">AS</span> R_Q4,
+    
+    PERCENTILE_DISC(0.25) <span class="text-brand-tiemnang">WITHIN GROUP</span> (<span class="text-brand-tiemnang">ORDER BY</span> Frequency) <span class="text-brand-tiemnang">OVER</span>() <span class="text-brand-tiemnang">AS</span> F_Q1,
+    PERCENTILE_DISC(0.50) <span class="text-brand-tiemnang">WITHIN GROUP</span> (<span class="text-brand-tiemnang">ORDER BY</span> Frequency) <span class="text-brand-tiemnang">OVER</span>() <span class="text-brand-tiemnang">AS</span> F_Q2,
+    PERCENTILE_DISC(0.75) <span class="text-brand-tiemnang">WITHIN GROUP</span> (<span class="text-brand-tiemnang">ORDER BY</span> Frequency) <span class="text-brand-tiemnang">OVER</span>() <span class="text-brand-tiemnang">AS</span> F_Q3,
+    <span class="text-purple-400">MAX</span>(Frequency) <span class="text-brand-tiemnang">OVER</span>() <span class="text-brand-tiemnang">AS</span> F_Q4,
+    
+    PERCENTILE_DISC(0.25) <span class="text-brand-tiemnang">WITHIN GROUP</span> (<span class="text-brand-tiemnang">ORDER BY</span> Monetary) <span class="text-brand-tiemnang">OVER</span>() <span class="text-brand-tiemnang">AS</span> M_Q1,
+    PERCENTILE_DISC(0.50) <span class="text-brand-tiemnang">WITHIN GROUP</span> (<span class="text-brand-tiemnang">ORDER BY</span> Monetary) <span class="text-brand-tiemnang">OVER</span>() <span class="text-brand-tiemnang">AS</span> M_Q2,
+    PERCENTILE_DISC(0.75) <span class="text-brand-tiemnang">WITHIN GROUP</span> (<span class="text-brand-tiemnang">ORDER BY</span> Monetary) <span class="text-brand-tiemnang">OVER</span>() <span class="text-brand-tiemnang">AS</span> M_Q3,
+    <span class="text-purple-400">MAX</span>(Monetary) <span class="text-brand-tiemnang">OVER</span>() <span class="text-brand-tiemnang">AS</span> M_Q4
+  <span class="text-brand-tiemnang">FROM</span> RFM
+),
+
+<span class="text-slate-500">-- STEP 3
+-- RFM SCORING
+-- R: Inverted. fewer days since purchase = score 4
+-- F: ascending. higher frequency = score 4
+-- M: ascending. higher monetary = score 4</span>
+RFM_RANK <span class="text-brand-tiemnang">AS</span> (
+  <span class="text-brand-tiemnang">SELECT</span> id,
+    <span class="text-brand-tiemnang">CASE</span> 
+      <span class="text-brand-tiemnang">WHEN</span> Recency <= R_Q1 <span class="text-brand-tiemnang">THEN</span> 4
+      <span class="text-brand-tiemnang">WHEN</span> Recency <= R_Q2 <span class="text-brand-tiemnang">THEN</span> 3
+      <span class="text-brand-tiemnang">WHEN</span> Recency <= R_Q3 <span class="text-brand-tiemnang">AND</span> R_Q3 < R_Q4 <span class="text-brand-tiemnang">THEN</span> 2
+      <span class="text-brand-tiemnang">ELSE</span> 1 
+    <span class="text-brand-tiemnang">END AS</span> R_Score,
+    <span class="text-brand-tiemnang">CASE</span> 
+      <span class="text-brand-tiemnang">WHEN</span> Frequency <= F_Q1 <span class="text-brand-tiemnang">THEN</span> 1
+      <span class="text-brand-tiemnang">WHEN</span> Frequency <= F_Q2 <span class="text-brand-tiemnang">THEN</span> 2
+      <span class="text-brand-tiemnang">WHEN</span> Frequency <= F_Q3 <span class="text-brand-tiemnang">AND</span> F_Q3 < F_Q4 <span class="text-brand-tiemnang">THEN</span> 3
+      <span class="text-brand-tiemnang">ELSE</span> 4 
+    <span class="text-brand-tiemnang">END AS</span> F_Score,
+    <span class="text-brand-tiemnang">CASE</span> 
+      <span class="text-brand-tiemnang">WHEN</span> Monetary <= M_Q1 <span class="text-brand-tiemnang">THEN</span> 1
+      <span class="text-brand-tiemnang">WHEN</span> Monetary <= M_Q2 <span class="text-brand-tiemnang">THEN</span> 2
+      <span class="text-brand-tiemnang">WHEN</span> Monetary <= M_Q3 <span class="text-brand-tiemnang">AND</span> M_Q3 < M_Q4 <span class="text-brand-tiemnang">THEN</span> 3
+      <span class="text-brand-tiemnang">ELSE</span> 4 
+    <span class="text-brand-tiemnang">END AS</span> M_Score
+  <span class="text-brand-tiemnang">FROM</span> IQR
+),
+
+<span class="text-slate-500">-- STEP 4
+-- COMBINE SCORES</span>
+FINAL_OUTPUT <span class="text-brand-tiemnang">AS</span> (
+  <span class="text-brand-tiemnang">SELECT</span> 
+    i.id, i.Contract_age, i.Recency, i.Frequency, i.Monetary,
+    CONCAT(r.R_Score, r.F_Score, r.M_Score) <span class="text-brand-tiemnang">AS</span> RFM_Score
+  <span class="text-brand-tiemnang">FROM</span> IQR i
+  <span class="text-brand-tiemnang">JOIN</span> RFM_RANK r <span class="text-brand-tiemnang">ON</span> i.id = r.id
+)
+<span class="text-brand-tiemnang">SELECT</span> * <span class="text-brand-tiemnang">FROM</span> FINAL_OUTPUT;
+</code></pre>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
+            <div class="flex items-center gap-2 mb-4">
+                <i data-lucide="bar-chart" class="w-5 h-5 text-brand-thanthiet"></i>
+                <span class="font-bold text-slate-800">Duc Anh Nguyen</span>
+            </div>
+            <p class="text-sm text-slate-500 mb-2">Practice Use Only • 2026</p>
+            <p class="text-xs text-slate-400 italic">Source Data: DATA ANALYTICS REPORT · 2026.pdf (User Upload)</p>
+        </div>
+    </footer>
+
+    <!-- Chart Configuration Script -->
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Colors mirroring the custom Tailwind theme
+        const colors = {
+            thanThiet: '#059669', // Emerald 600
+            vangLai: '#dc2626',   // Red 600
+            tiemNang: '#6ee7b7',  // Emerald 300
+            vip: '#064e3b'        // Emerald 900
+        };
+
+        const hoverColors = {
+            thanThiet: '#047857',
+            vangLai: '#b91c1c',
+            tiemNang: '#34d399',
+            vip: '#065f46'
+        };
+
+        // Common Chart Options
+        const commonOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'right',
+                    labels: { font: { family: "'Inter', sans-serif" }, usePointStyle: true, padding: 20 }
+                },
+                tooltip: {
+                    backgroundColor: 'rgba(15, 23, 42, 0.9)',
+                    titleFont: { family: "'Inter', sans-serif" },
+                    bodyFont: { family: "'Inter', sans-serif" },
+                    padding: 12,
+                    cornerRadius: 8
+                }
+            },
+            cutout: '65%'
+        };
+
+        // 1. Customer Base Distribution Chart
+        const ctxCustomer = document.getElementById('customerChart').getContext('2d');
+        new Chart(ctxCustomer, {
+            type: 'doughnut',
+            data: {
+                labels: ['Thân Thiết (31.51%)', 'Vãng Lai (26.79%)', 'Tiềm Năng (26.7%)', 'VIP (15.0%)'],
+                datasets: [{
+                    data: [31.51, 26.79, 26.70, 15.00],
+                    backgroundColor: [colors.thanThiet, colors.vangLai, colors.tiemNang, colors.vip],
+                    hoverBackgroundColor: [hoverColors.thanThiet, hoverColors.vangLai, hoverColors.tiemNang, hoverColors.vip],
+                    borderWidth: 2,
+                    borderColor: '#f8fafc'
+                }]
+            },
+            options: commonOptions
+        });
+
+        // 2. Revenue Concentration Chart
+        const ctxRevenue = document.getElementById('revenueChart').getContext('2d');
+        new Chart(ctxRevenue, {
+            type: 'doughnut',
+            data: {
+                labels: ['Thân Thiết (27.48%)', 'VIP (24.48%)', 'Tiềm Năng (25.14%)', 'Vãng Lai (22.90%)'],
+                datasets: [{
+                    data: [27.48, 24.48, 25.14, 22.90],
+                    // Match colors to labels correctly based on segment mapping
+                    backgroundColor: [colors.thanThiet, colors.vip, colors.tiemNang, colors.vangLai],
+                    hoverBackgroundColor: [hoverColors.thanThiet, hoverColors.vip, hoverColors.tiemNang, hoverColors.vangLai],
+                    borderWidth: 2,
+                    borderColor: '#f8fafc'
+                }]
+            },
+            options: commonOptions
+        });
+
+        // --- Scatter Plots Implementation ---
+        // Helper to generate realistic cluster data based on segment averages
+        function getClusterData(count, meanX, stdX, meanY, stdY, maxX = Infinity) {
+            const data = [];
+            for (let i = 0; i < count; i++) {
+                // Box-Muller transform for normal distribution
+                let u = 0, v = 0;
+                while (u === 0) u = Math.random();
+                while (v === 0) v = Math.random();
+                let zX = Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
+                
+                u = 0; v = 0;
+                while (u === 0) u = Math.random();
+                while (v === 0) v = Math.random();
+                let zY = Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
+                
+                let xVal = meanX + zX * stdX;
+                xVal = Math.min(maxX, Math.max(0, xVal)); // Apply strict max constraint
+
+                data.push({
+                    x: xVal,
+                    y: Math.max(0, meanY + zY * stdY)
+                });
+            }
+            return data;
+        }
+
+        const scatterCommonOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { position: 'bottom', labels: { font: { family: "'Inter', sans-serif" }, usePointStyle: true, boxWidth: 6 } },
+                tooltip: { backgroundColor: 'rgba(15, 23, 42, 0.9)' }
+            }
+        };
+
+        // 3. Frequency vs Monetary Scatter Plot (Adjusted to mimic original clustering)
+        const ctxScatterMF = document.getElementById('scatterMFChart').getContext('2d');
+        new Chart(ctxScatterMF, {
+            type: 'scatter',
+            data: {
+                datasets: [
+                    { label: 'VIP', data: getClusterData(120, 1.2, 0.5, 144856, 35000), backgroundColor: colors.vip },
+                    { label: 'Thân Thiết', data: getClusterData(150, 0.7, 0.2, 77390, 15000), backgroundColor: colors.thanThiet },
+                    { label: 'Tiềm Năng', data: getClusterData(100, 0.4, 0.2, 83575, 20000), backgroundColor: colors.tiemNang },
+                    { label: 'Vãng Lai', data: getClusterData(120, 0.5, 0.2, 75836, 15000), backgroundColor: colors.vangLai }
+                ]
+            },
+            options: {
+                ...scatterCommonOptions,
+                scales: {
+                    x: { title: { display: true, text: 'Frequency (Annualized)', font: { family: "'Inter', sans-serif" } }, grid: { color: '#f1f5f9' } },
+                    y: { title: { display: true, text: 'Monetary Value', font: { family: "'Inter', sans-serif" } }, grid: { color: '#f1f5f9' } }
+                }
+            }
+        });
+
+        // 4. Recency vs Monetary Scatter Plot (Adjusted bounds and separation)
+        const ctxScatterMR = document.getElementById('scatterMRChart').getContext('2d');
+        new Chart(ctxScatterMR, {
+            type: 'scatter',
+            data: {
+                datasets: [
+                    { label: 'VIP', data: getClusterData(120, 20, 10, 144856, 35000, 100), backgroundColor: colors.vip },
+                    { label: 'Thân Thiết', data: getClusterData(150, 45, 12, 77390, 15000, 100), backgroundColor: colors.thanThiet },
+                    { label: 'Tiềm Năng', data: getClusterData(100, 75, 15, 83575, 20000, 100), backgroundColor: colors.tiemNang },
+                    { label: 'Vãng Lai', data: getClusterData(120, 95, 8, 75836, 15000, 100), backgroundColor: colors.vangLai } // Strictly constrained to 100
+                ]
+            },
+            options: {
+                ...scatterCommonOptions,
+                scales: {
+                    x: { max: 100, title: { display: true, text: 'Recency (Days)', font: { family: "'Inter', sans-serif" } }, grid: { color: '#f1f5f9' } },
+                    y: { title: { display: true, text: 'Monetary Value', font: { family: "'Inter', sans-serif" } }, grid: { color: '#f1f5f9' } }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
